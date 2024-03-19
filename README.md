@@ -23,11 +23,11 @@ Running model:
 Post process results:
 1. cd ${workdir}/post-process
 
-! python version
+for python version
 2. cp ../scripts_templates/python/* .
 3. python Example_figure.py
 
-! matlab version
+for matlab version
 2. cp ../scripts_templates/matlab/* .  
 3. open Example_figure.m in MATLAB and run the script directly.
 
