@@ -1,0 +1,39 @@
+#----- Some general parameters ----------------
+&GENERAL iexec=1, ngll=5, fmax=3.d0 , W=Inf, ndof=1 ,
+title = '2D elastic SWF with thermal pressurization', verbose='1111' , ItInfo = 50/
+
+#----- Build the mesh ---------------------------
+&MESH_DEF  method = 'CARTESIAN'/
+&MESH_CART xlim=0d3,30d3, zlim=0d3,15d3, nelem=60,30/
+
+#---- Material parameters --------------
+&MATERIAL tag=1, kind='ELAST'  /
+&MAT_ELASTIC rho=2705.d0, cp=5770.d0, cs=3330.d0 /
+
+#----- Boundary conditions ---------------------
+&BC_DEF  tag = 1, kind = 'DYNFLT' /
+&BC_DYNFLT friction='SWF','TWF','TP', Tn=-50d6,Tt=28.5d6 /
+&BC_DYNFLT_SWF Dc=0.4d0, MuS=0.6d0, MuD=0.51d0 /
+&BC_DYNFLT_TWF kind=1, MuS=0.6d0, MuD=0.51d0, Mu0=0.6d0,
+               X=0.d0, Z=0.d0, V=0.333d3, L=0.1665d3, T=10d0 /
+&BC_DYNFLT_TP  shape='gaussian', T0=483.15d0, nz=200, dz=1d-3, 
+               rhoc=2.7d6, K=0, alphath=0.7d-6, alphahy=1d-6, 
+               Lambda=1d6, W=50d-3, beta=1, deltaD=10d-3, Phi=0 /
+
+
+&BC_DEF  tag = 2 , kind = 'ABSORB' /
+&BC_DEF  tag = 3 , kind = 'ABSORB' /
+&BC_DEF  tag = 4 , kind = 'DIRNEU' /
+&BC_DIRNEU h='N', v='D' /
+
+
+#---- Time scheme settings ----------------------
+&TIME  TotalTime=15d0, Courant=0.3d0, kind='newmark' /
+
+#----- Receivers ---------------------------------
+#&REC_LINE number = 10 , first = 0d3,10d3, last = 50.d3,10d3, isamp=20, AtNode=F /
+
+#--------- Plots settings ----------------------
+&SNAP_DEF itd=100, fields ='DVS',bin=T,ps=F /
+&SNAP_PS  vectors=F, interpol=T, DisplayPts=6, ScaleField=0d0   /
+
