@@ -33,7 +33,7 @@
 %
 % NOTE		Fault normal components on each side of the fault are exported only in P-SV
 %
-function data = sem2d_read_fault(name)
+function data = sem2d_read_fault(name,dir)
 
 % length of the tag at the begining and end of a binary record
 % in number of single precision words (4*bytes)
@@ -49,6 +49,10 @@ if ~exist('name','var')
   else
     name=list{1}(1:5);
   end
+end
+
+if exist('dir','var')
+   name = strcat(dir,name);
 end
 
 % Read parameters from header file
@@ -78,7 +82,6 @@ raw = fread(fid,[data.nx+2*LENTAG,inf],'single') ;
 fclose(fid);
 %raw = reshape(raw(2:data.nx+1,:),[data.nx ndat data.nt]);
 raw = reshape(raw(LENTAG+1:LENTAG+data.nx,:),data.nx,ndat,[]);
-
 
 % Reformat each field [nx,nt]
 for i=1:numel(variables)

@@ -1,10 +1,10 @@
 % Modify the path of the output files
-datadir='/home/weng/Works/Softwares/sem2dpack/EXAMPLES/Thermpres_SWF';
+datadir='../simulations/';
 
 grid = sem2d_read_specgrid(datadir);
-data = sem2d_read_fault('Flt01');
+data = sem2d_read_fault('Flt01',datadir);
 
-figure(1)
+gcf = figure(1);
 subplot(2,2,1)
 % Slip rate image
 imagesc((0:data.nt-1)*data.dt,data.x/1e3,data.v);
@@ -48,14 +48,18 @@ plot((0:data.nt-1)*data.dt,(data.st(p3,:)+data.st0(p3,:))/1e6);
 
 hold off
 xlim([0 inf]);
-ylim([0 30]);
 xlabel('Time (s)');
 ylabel('Shear stress (MPa)');
 
+saveas(gcf,'./figs/rupture_info.png')
+
 
 %%  if tp is used
-if ~isempty(data.P)
-    figure(2)
+try
+    if ~isempty(P,data) then
+        print('TP is used.')
+    end
+    gcf = figure(2);
     subplot(2,2,1)
     % slip rate image
     imagesc((0:data.nt-1)*data.dt,data.x/1e3,data.P/1e6);
@@ -99,4 +103,7 @@ if ~isempty(data.P)
     xlim([0 inf]);
     xlabel('Time (s)');
     ylabel('Temperature (K)');
-end
+    saveas(gcf,'./figs/pressure_temp.png')
+end 
+
+

@@ -38,7 +38,7 @@
 import os
 import numpy as np
 
-def sem2d_read_fault(model_name,fault_name):
+def sem2d_read_fault(fault_name,model_name):
     
     # length of the tag at the begining and end of a binary record
     # in number of single precision words (4*bytes)
@@ -82,7 +82,7 @@ def sem2d_read_fault(model_name,fault_name):
     f = open(model_name+"/"+fault_name+"_init_sem2d.tab")
     lines = f.readlines()
     xyz = []
-    for line in lines[4::]:
+    for line in lines[:]:
         xyz.append(line.split())
     xyz = np.asarray(xyz).astype(np.float)
     data['st0'] = xyz[:,0]
