@@ -23,25 +23,16 @@ Running model:
 Post process results:
 1. cd ${workdir}/post-process
 
-# python version
+! python version
 2. cp ../scripts_templates/python/* .
 3. python Example_figure.py
 
-# matlab version
+! matlab version
 2. cp ../scripts_templates/matlab/* .  
 3. open Example_figure.m in MATLAB and run the script directly.
 
 
-
-
-
-
-Manual for running sem2dpack
-
-======================================================================================================================================
-= Self-documentation for the INPUT BLOCKS of the SEM2D code ==========================================================================
-======================================================================================================================================
- 
+# Manual for running sem2dpack (from sem2dpack)
  ----------------------------------------------------------------------------
 
  NAME   : BC_ABSORB
