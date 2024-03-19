@@ -23,12 +23,15 @@ Running model:
 Post process results:
 1. cd ${workdir}/post-process
 
-for python version:
+for python version: 
+
 2. cp ../scripts_templates/python/* .
 3. python Example_figure.py
+
 for matlab version:
+
 2. cp ../scripts_templates/matlab/* .  
 3. open Example_figure.m in MATLAB and run the script directly.
 
 
-# Manual for running sem2dpack see ${workdir}code/sem2dpack/doc/doc.txt 
+# Manual for running sem2dpack see ${workdir}/code/sem2dpack/doc/doc.txt 
